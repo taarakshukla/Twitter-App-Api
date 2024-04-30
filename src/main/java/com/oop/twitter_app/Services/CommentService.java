@@ -41,13 +41,13 @@ public class CommentService {
             String success = "Comment created successfully";
             return ResponseEntity.ok(success);
 
-        } else if(post==null){
-            ErrorMessage errorMessage = new ErrorMessage("Post does not exist");
+        } else if(user==null){
+            ErrorMessage errorMessage = new ErrorMessage("User does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 
         }
         else{
-            ErrorMessage errorMessage = new ErrorMessage("User does not exist");
+            ErrorMessage errorMessage = new ErrorMessage("Post does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 
         }
