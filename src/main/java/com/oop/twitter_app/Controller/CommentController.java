@@ -49,7 +49,6 @@ public class CommentController {
     @PatchMapping
     public ResponseEntity<?> editComment(@RequestBody Comment comment) {
         return commentService.editComment(comment);
-
     }
 
     @DeleteMapping

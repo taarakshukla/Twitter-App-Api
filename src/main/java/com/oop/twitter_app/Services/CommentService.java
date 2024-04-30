@@ -44,25 +44,27 @@ public class CommentService {
         } else if(user==null){
             ErrorMessage errorMessage = new ErrorMessage("User does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-
         }
         else{
             ErrorMessage errorMessage = new ErrorMessage("Post does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-
         }
     }
 
     public Comment getCommentById(Long commentId) {
-        Optional<Comment> commentOptional = commentRepository.findById(commentId);
-        return commentOptional.orElse(null);
+        try {
+            Optional<Comment> commentOptional = commentRepository.findById(commentId);
+            return commentOptional.orElse(null);
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     public ResponseEntity<?> editComment(Comment comment) {
         if (!commentRepository.existsById(comment.getCommentId())) {
             ErrorMessage errorMessage = new ErrorMessage("Comment does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-
         }
         Comment existingComment = commentRepository.findById(comment.getCommentId()).orElse(null);
         if (existingComment == null) {
@@ -73,7 +75,6 @@ public class CommentService {
         commentRepository.save(existingComment);
         String success = "Comment edited successfully";
         return ResponseEntity.ok(success);
-
     }
 
     public ResponseEntity<?> deleteComment(Long comment) {
