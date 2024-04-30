@@ -38,7 +38,6 @@ public class CommentController {
             } else {
                 ErrorMessage errorMessage = new ErrorMessage("Comment does not exist");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
-
             }
         }
         catch (Exception e) {
