@@ -74,6 +74,7 @@ public class PostService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 
         }
+        // is post gets edited successfully
         existingPost.setPostBody(post.getPostBody());
         postRepository.save(existingPost);
         String success = "Post edited successfully";

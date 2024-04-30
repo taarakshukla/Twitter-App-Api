@@ -21,9 +21,11 @@ public class UserService {
     public ResponseEntity<?> createUser(User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
+            // if account already exist
             ErrorMessage errorMessage = new ErrorMessage("Forbidden, Account already exists");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
+        // new account created
         userRepository.save(user);
         String success = "Account Creation Successful";
         return ResponseEntity.ok(success);
@@ -37,10 +39,12 @@ public class UserService {
                 String success = "Login Successful";
                 return ResponseEntity.ok(success);
             } else {
+                // if the user email is present in the database but the password provided is incorrect
                 ErrorMessage errorMessage = new ErrorMessage("Username/Password Incorrect");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
             }
         } else {
+            // user not present
             ErrorMessage errorMessage = new ErrorMessage("User does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
@@ -48,6 +52,7 @@ public class UserService {
 
     public User getUserDetail(Long userID) {
         try {
+            // checking if the user with this userid is present or not
             Optional<User> userOptional = userRepository.findById(userID);
             return userOptional.orElse(null);
         }
@@ -58,6 +63,7 @@ public class UserService {
 
     public List<User> getAllUsers() {
         try {
+            // finding all users in database
             return userRepository.findAll();
         }
         catch (Exception e) {

@@ -90,6 +90,8 @@ public class UserController {
 
     @GetMapping("/")
     public List<PostsOutput> getAllPostsSortedByDate() {
+
+        // getting all the posts in sorted order, with the latest post on top
         List<Post> posts = postRepository.findAllByOrderByDateDesc();
         List<PostsOutput> outputs = new ArrayList<>();
 

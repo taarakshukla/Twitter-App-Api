@@ -5,9 +5,10 @@ import com.oop.twitter_app.Entities.Post;
 import java.util.List;
 
 public class UsersOutput {
-    private String email;
-    private Long userID;
+
     private String name;
+    private Long userID;
+    private String email;
 //    private List<Post> posts;
 
 //    public List<Post> getPosts() {

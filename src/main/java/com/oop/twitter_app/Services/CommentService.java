@@ -27,12 +27,14 @@ public class CommentService {
     private UserRepository userRepository;
 
     public ResponseEntity<?> createComment(Comment comment) {
+
         // Retrieve post and user entities based on postID and userID
         Post post = postRepository.findById(comment.getPostID()).orElse(null);
         User user = userRepository.findById(comment.getUserID()).orElse(null);
 
         // Check if post and user exist
         if (post != null && user != null) {
+
             // Set post and user for the comment
             comment.setPost(post);
             comment.setUser(user);
@@ -46,6 +48,7 @@ public class CommentService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
         else{
+            // f the user exists but the post does not exist
             ErrorMessage errorMessage = new ErrorMessage("Post does not exist");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }

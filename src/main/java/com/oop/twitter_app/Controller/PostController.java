@@ -31,8 +31,11 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody Post post) {
-        Long userId = post.getUserID(); // Extract userID from JSON
-        post.setUserID(userId); // Set userID in the Post object
+        // Extract userID from JSON body provided
+        Long userId = post.getUserID();
+
+        // Set userID in the Post object
+        post.setUserID(userId);
         return postService.createPost(post);
     }
 
